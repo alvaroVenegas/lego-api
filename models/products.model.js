@@ -6,8 +6,7 @@ const productSchema = new mongoose.Schema({
     article:{type:Number, required:true},
     doc:{type:String},
     set:{type: mongoose.Types.ObjectId, ref: 'sets'},
-    category:{type: mongoose.Types.ObjectId, ref: 'categories'},
-    userId: { type: mongoose.Types.ObjectId, ref: 'users' }
+    user: { type: mongoose.Types.ObjectId, ref: 'users' }
 },
 {
     timestamps: true,

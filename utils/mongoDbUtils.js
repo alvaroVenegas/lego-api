@@ -7,17 +7,14 @@ const mongoDb = process.env.MONGODBURL;
 console.log(mongoDb);
 const connect = async () => {
     try{
-        console.log("aui")
         const db = await mongoose.connect(mongoDb, { 
             useNewUrlParser: true, 
-            useUnifiedTopology: true, 
-            useFindAndModify:false
+            useUnifiedTopology: true
         });
-        console.log('despues')
         const {name, host} = db.connection;
         console.log(`Connected with db: ${name}, in host: ${host}`)
-    }catch{
-        console.log('Error to connect with BD');
+    }catch(error){
+        console.log('Error to connect with BD',error);
     }
 
 }

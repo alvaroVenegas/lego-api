@@ -1,6 +1,7 @@
 const express = require ('express');
-const homeRoutes = require ('./routes/home.routes');
 const {connect} = require ('./utils/mongoDbUtils');
+const homeRoutes = require ('./routes/home.routes');
+const setsRoutes = require ('./routes/sets.routes');
 //const mongoDb = require ("./utils/mongoDbUtils")
 const PORT = 3000;
 const app = express();
@@ -8,7 +9,13 @@ const app = express();
 connect();
 //mongoDb.connect();
 
+//Json en el body
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+//Rutas
 app.use("/", homeRoutes);
+app.use('/sets', setsRoutes);
 
 
 app.use("*", (req, res, next) => {

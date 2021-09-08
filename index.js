@@ -1,13 +1,19 @@
 const express = require ('express');
 const {connect} = require ('./utils/mongoDbUtils');
+const passport = require ('passport');
+require('./authentication')
 const homeRoutes = require ('./routes/home.routes');
 const setsRoutes = require ('./routes/sets.routes');
 const usersRoutes = require ('./routes/users.routes');
+const loginRoutes = require ('./routes/login.routes')
 //const mongoDb = require ("./utils/mongoDbUtils")
 const PORT = 3000;
 const app = express();
 
 connect();
+
+app.use(passport.initialize()); 
+
 
 //Json en el body
 app.use(express.json())
@@ -17,6 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/", homeRoutes);
 app.use('/sets', setsRoutes);
 app.use('/users', usersRoutes);
+app.use('/login', loginRoutes)
 
 
 app.use("*", (req, res) => {

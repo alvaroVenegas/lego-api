@@ -2,6 +2,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const User = require('../models/users.model');
 const validations = require('../utils/validations')
+const passport = require('passport')
 
 const registerStrategy = new LocalStrategy(
     {
@@ -11,7 +12,7 @@ const registerStrategy = new LocalStrategy(
     },
     async (req, userName, password, done) => {
         try {
-            const userExist = await User.findOne({userName:userName})
+            const userExist = await User.findOne({userName})
             if(userExist){
                 const error = new Error('El usuario ya existe')
                 return done(error, null)
@@ -24,7 +25,7 @@ const registerStrategy = new LocalStrategy(
             const passwordHas = await bcrypt.hash(password, saltRounds)
             const newUser = new User(
                 {
-                    userName : req.body.userName,
+                    userName : userName,
                     password : passwordHas,
                 }
             )
@@ -36,4 +37,7 @@ const registerStrategy = new LocalStrategy(
         }
     }    
 )
+
+
+
 module.exports = registerStrategy

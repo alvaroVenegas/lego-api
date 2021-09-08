@@ -1,17 +1,15 @@
-const User = require ('../models/users.model');
-const passport = require ('passport');
-const bcrypt = require ('bcrypt');
+const User = require('../models/users.model');
+const passport = require('passport');
+const bcrypt = require('bcrypt');
 
 const postUser = (req, res, next) => {
     const { userName, password } = req.body;
-    console.log('entro')
 
     if (!userName || !password) {
         const error = 'Completa todos los campos'
         return next(error)
     }
     const done = (error, user) => {
-        console.log('entro2')
         if (error) return next(error);
         /*Si quisiera que el usuario registrado se logueara 
         automaticamente despues de registrar
@@ -26,7 +24,9 @@ const postUser = (req, res, next) => {
         return res.status(201).json(user)
     };
     passport.authenticate('register', done)(req);
-};
+}; 
+
+
 
 module.exports = {
     postUser

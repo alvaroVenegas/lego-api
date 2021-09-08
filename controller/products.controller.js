@@ -22,7 +22,7 @@ const getProducts = async (req, res, next) => {
 const getProductsByUser = async (req, res, next) => {
     try{    
         const userIdLogeado = req.user._id
-        console.log(userIdLogeado)        
+        //console.log(userIdLogeado)        
         const productsMongo = await Product.find({user:userIdLogeado}).populate('set')
         return res.status(200).json(productsMongo)
 

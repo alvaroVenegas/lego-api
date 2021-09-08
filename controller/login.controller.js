@@ -33,7 +33,7 @@ const postLogOut = (req, res, next) => {
         })
 
     }else {
-        return res.status(304).json('No hay ningun usuario logueado')
+        return res.status(401).json('No hay ningun usuario logueado')
     }
 }
 

@@ -15,6 +15,8 @@ const productsRoutes = require ('./routes/products.routes')
 
 const MongoStore = require('connect-mongo')
 
+const {isAuth, isAdmin} = require('./middlewares/auth.middleware')
+
 
 const PORT = 3000;
 const app = express();
@@ -40,12 +42,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 //Rutas
-app.use("/", homeRoutes);
-app.use('/sets', setsRoutes);
-app.use('/users', usersRoutes);
 app.use('/login', loginRoutes)
+app.use('/users', usersRoutes);
+app.use("/", homeRoutes);
+app.use(isAuth)
 app.use('/legos', productsRoutes)
-
+app.use('/sets', setsRoutes);
 
 app.use("*", (req, res) => {
     const error = new Error("Error, ruta desconocida")

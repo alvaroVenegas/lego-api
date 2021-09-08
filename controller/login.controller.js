@@ -23,6 +23,22 @@ const postLogin = (req, res, next) => {
     passport.authenticate('login', done)(req);
 }
 
+const postLogOut = (req, res, next) => {
+    if(req.user){
+        req.logout();
+
+        req.session.destroy(() => {
+            res.clearCookie('connect.sid')
+            return res.status(200).json('¡Hasta Pronto!')
+        })
+
+    }else {
+        return res.status(304).json('No hay ningun usuario logueado')
+    }
+}
+
+
 module.exports = {
-    postLogin
+    postLogin,
+    postLogOut
 }

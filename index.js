@@ -3,14 +3,19 @@ const {connect} = require ('./utils/mongoDbUtils');
 const passport = require ('passport');
 require('./authentication')
 const session = require('express-session')
+
 const dotenv = require('dotenv');
 dotenv.config();
+
 const homeRoutes = require ('./routes/home.routes');
 const setsRoutes = require ('./routes/sets.routes');
 const usersRoutes = require ('./routes/users.routes');
 const loginRoutes = require ('./routes/login.routes')
 const productsRoutes = require ('./routes/products.routes')
-//const mongoDb = require ("./utils/mongoDbUtils")
+
+const MongoStore = require('connect-mongo')
+
+
 const PORT = 3000;
 const app = express();
 
@@ -22,8 +27,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 1 * 24 * 60 * 60 * 1000,
-    }
-    
+    },
+    store: MongoStore.create({mongoUrl:process.env.MONGODBURL})
 }));
 
 app.use(passport.initialize()); 

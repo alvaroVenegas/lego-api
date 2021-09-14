@@ -31,8 +31,22 @@ const deleteSet = async (req, res, next) => {
     }
 }
 
+const putSet = async (req, res, next) => {
+    try{
+        const {id} = req.params
+        const setUpdate = new Set(req.body)
+        setUpdate._id = id;
+        const setUpdatedBd = await Set.findByIdAndUpdate(id, setUpdate)
+        return res.status(200).json(setUpdatedBd)
+    }catch(error){
+        return next(error)
+    }
+
+}
+
 module.exports = {
     postSet,
     getSets,
-    deleteSet
+    deleteSet,
+    putSet
 }

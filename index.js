@@ -10,9 +10,6 @@ dotenv.config();
 const homeRoutes = require ('./routes/home.routes');
 const setsRoutes = require ('./routes/sets.routes');
 const usersRoutes = require ('./routes/users.routes');
-<<<<<<< HEAD
-//const mongoDb = require ("./utils/mongoDbUtils")
-=======
 const loginRoutes = require ('./routes/login.routes')
 const productsRoutes = require ('./routes/products.routes')
 
@@ -21,13 +18,10 @@ const MongoStore = require('connect-mongo')
 const {isAuth, isAdmin} = require('./middlewares/auth.middleware')
 
 
->>>>>>> 03b986c57ccb66ba01146c9064dc4eae307aaef0
 const PORT = 3000;
 const app = express();
 
 connect();
-<<<<<<< HEAD
-=======
 
 app.use(session({
     secret: process.env.SESSION_SECRET, 
@@ -42,7 +36,6 @@ app.use(session({
 app.use(passport.initialize()); 
 app.use(passport.session());
 
->>>>>>> 03b986c57ccb66ba01146c9064dc4eae307aaef0
 
 //Json en el body
 app.use(express.json())
@@ -57,10 +50,6 @@ app.use('/legos', productsRoutes)
 app.use('/sets', setsRoutes);
 app.use('/users', usersRoutes);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 03b986c57ccb66ba01146c9064dc4eae307aaef0
 app.use("*", (req, res) => {
     const error = new Error("Error, ruta desconocida")
     error.status = 404;

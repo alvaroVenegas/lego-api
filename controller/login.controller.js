@@ -16,6 +16,7 @@ const postLogin = (req, res, next) => {
             };
             //console.log('usuario logeado')
             return res.status(200).json(user)
+            
             //return res.redirect('/');
         });
     };
